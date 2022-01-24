@@ -3,7 +3,7 @@ from PIL import ImageGrab
 import pytesseract
 import time
 from datetime import datetime
-
+import cv2      #adds preview window
 def main():
     # Generate Text file name
     startString = "C:/Users/yarne/Desktop/RunLogs/"
@@ -13,7 +13,7 @@ def main():
     # Create and open file
     fileObj = open(startString,"w")
 
-    runLength = time.time() + 5
+    runLength = time.time() + 40
     while time.time() < runLength:
         
         # Set the boundaries to capture images
@@ -24,9 +24,15 @@ def main():
 
         preImg = ImageGrab.grab(bbox=(leftBorder, topBorder, rightBorder, topBorder + height),all_screens=False)
         img = np.array(preImg)
+        cv2.imshow('window', img)       #adds preview window
         txt = pytesseract.image_to_string(img)
         print(txt)      
         fileObj.write(txt)
+        
+        #Remove if preview window is not needed
+        if cv2.waitKey(25) & 0xFF == ord('q'):  
+            cv2.destroyAllWindows()
+            break
 
     fileObj.close()
 
