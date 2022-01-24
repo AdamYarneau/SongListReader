@@ -7,7 +7,7 @@ from datetime import datetime
 def main():
     startString = "RunLogs/"
     startString += datetime.now().strftime("%H-%M-%S")
-    startString += ".txt"
+    startString += "-fromfile.txt"
     fileObj = open(startString,"w")
     listOfFiles = ["WordPics/1.PNG","WordPics/2.PNG","WordPics/3.PNG","WordPics/4.PNG","WordPics/5.PNG","WordPics/6.PNG","WordPics/7.PNG","WordPics/8.PNG","WordPics/9.PNG","WordPics/current.PNG","WordPics/Capture.PNG"]
     custom_psm_config = r'--psm 7'

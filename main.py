@@ -8,7 +8,7 @@ def main():
     # Generate Text file name
     startString = "RunLogs/"
     startString += datetime.now().strftime("%H-%M-%S")
-    startString += ".txt"
+    startString += "-main.txt"
 
     # Create and open file
     fileObj = open(startString,"w")
