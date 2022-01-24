@@ -6,14 +6,14 @@ from datetime import datetime
 import cv2      #adds preview window
 def main():
     # Generate Text file name
-    startString = "C:/Users/yarne/Desktop/RunLogs/"
+    startString = "RunLogs/"
     startString += datetime.now().strftime("%H-%M-%S")
     startString += ".txt"
 
     # Create and open file
     fileObj = open(startString,"w")
-
-    runLength = time.time() + 40
+    custom_psm_config = r'--psm 7'
+    runLength = time.time() + 10
     while time.time() < runLength:
         
         # Set the boundaries to capture images
@@ -25,7 +25,7 @@ def main():
         preImg = ImageGrab.grab(bbox=(leftBorder, topBorder, rightBorder, topBorder + height),all_screens=False)
         img = np.array(preImg)
         cv2.imshow('window', img)       #adds preview window
-        txt = pytesseract.image_to_string(img)
+        txt = pytesseract.image_to_string(img, config=custom_psm_config)
         print(txt)      
         fileObj.write(txt)
         
